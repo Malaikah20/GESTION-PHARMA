@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environnements virtuels
+.venv/
+venv/
+env/
+
+# Variables d'environnement
+.env
+.env.*
+!.env.example
+
+# Base de donnees locale
+*.sqlite3
+
+# Fichiers media et fichiers temporaires
+/staticfiles/
+/media/*
+*.log
+
+# IDE
+.vscode/
+.idea/
