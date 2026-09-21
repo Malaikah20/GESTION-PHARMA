@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% comment %}
+  notifications/liste.html - alertes calculees depuis les produits et ventes.
+{% endcomment %}
+
+{% block title %}Notifications - GestionPharmacie{% endblock %}
+
+{% block content %}
+
+  <div class="app-content-header">
+    <h1 class="app-content-headerText">Notifications</h1>
+    {% include "partials/theme_switch.html" %}
+    <span class="app-content-headerText" style="font-size:13px;opacity:0.65;">
+      {{ notifications|length }} alerte{{ notifications|length|pluralize }}
+    </span>
+  </div>
+
+  <div class="panel">
+    <ul class="simple-list">
+      {% for notification in notifications %}
+      <li class="simple-list-item">
+        <div class="simple-list-icon {{ notification.type }}">
+          {% if notification.type == 'danger' %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          {% elif notification.type == 'warning' %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 9.4 7.55 4.24"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1.73z"/></svg>
+          {% else %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          {% endif %}
+        </div>
+        <div class="simple-list-content">
+          <p class="simple-list-title">{{ notification.titre }}</p>
+          <p class="simple-list-meta">{{ notification.detail }}</p>
+        </div>
+      </li>
+      {% empty %}
+      <li class="simple-list-item">
+        <div class="simple-list-icon success">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="simple-list-content">
+          <p class="simple-list-title">Aucune notification</p>
+          <p class="simple-list-meta">Tous les produits actifs sont dans un etat normal.</p>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+{% endblock %}
